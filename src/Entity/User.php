@@ -41,6 +41,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $role;
 
     /**
+     * @ORM\Column (type="array")
+     */
+    private $roles;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $name;
