@@ -36,6 +36,8 @@
                                placeholder="Enter password"/>
                     </div>
 
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
                     <div class="d-flex justify-content-between align-items-center">
                     </div>
 
