@@ -52,4 +52,29 @@ class MoviesController extends AbstractController
             'movies' => $movies
         ]);
     }
+
+    #[Route('/movies/update/{movieId}', name: 'app_update_movies')]
+    public function updateMovies(
+        int $movieId,
+        MoviesRepository $moviesRepository,
+        Request $request
+    ): Response
+    {
+        $movie = $moviesRepository->findOneBy(['id' => $movieId]);
+
+        $form = $this->createForm(AddMoviesFormType::class, $movie);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->persist($movie);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_update_movies', ['movieId' => $movieId]);
+        }
+
+        return $this->render('movies/update.html.twig', [
+            'moviesForm' => $form->createView(),
+            'movie' => $movie
+        ]);
+    }
 }

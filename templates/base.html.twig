@@ -13,6 +13,7 @@
     {% endblock %}
     {% block javascripts %}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="{{ asset('/js/search_bar/search_bar.js') }}"></script>
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </head>
@@ -27,10 +28,14 @@
                 <img src="{{ asset('/img/logo.png') }}" alt="logo" style="width: auto; height: auto; max-width: 100%; max-height: 100%">
             </a>
         </div>
-        <div class="collapse navbar-collapse d-flex justify-content-end col-10 p-4" id="navbar-collapsable">
-
+        <div class="collapse navbar-collapse d-flex  col-10 p-4" id="navbar-collapsable">
+                <div class="d-flex col justify-content-start">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                    <input id="searchBar" name="searchBar" type="text" placeholder="Search...">
+                </div>
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <div class="text-white" style="font-weight: bold;">{{ app.user.username }}</div>
+            <div class="d-flex col justify-content-end">
+                    <div class="text-white pt-3" style="font-weight: bold;">{{ app.user.username }}</div>
                     <div class="dropdown">
                         <button
                                 class="dropdown-toggle btn"
@@ -62,6 +67,7 @@
                             {% endif %}
                         </ul>
                     </div>
+            </div>
                 {% else %}
                 {% endif %}
         </div>

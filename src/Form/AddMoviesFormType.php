@@ -4,6 +4,10 @@ namespace App\Form;
 
 use App\Entity\Movies;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,6 +20,9 @@ class AddMoviesFormType extends AbstractType
             ->add('title')
             ->add('description', TextareaType::class)
             ->add('imgUrl')
+            ->add('price', MoneyType::class, [
+                'currency' => 'PLN'
+            ])
         ;
     }
 

@@ -12,7 +12,7 @@ class HomeController extends BaseController
     #[Route('/', name: 'app_home')]
     public function home(): Response
     {
-        return $this->render('home/index.html.twig');
+        return $this->redirectToRoute('app_get_movies');
     }
 
     #[Route('/admin', name: 'app_admin')]
