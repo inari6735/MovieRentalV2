@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[IsGranted('ROLE_USER')]
 class HomeController extends BaseController
 {
-    #[Route('/home', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function home(): Response
     {
         return $this->render('home/index.html.twig');

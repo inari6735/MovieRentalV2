@@ -4,70 +4,18 @@
 
 {% block body %}
     <div class="row pt-5">
-        <div class="col">
-            <div class="card bg-light" style="width: 18rem;">
-                <img style="width: auto; height: 25rem;" class="card-img-top" src="https://fwcdn.pl/fpo/01/87/187/7451731.3.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-success">Add to cart</a>
-                    <a href="#" class="btn btn-danger">Buy</a>
+        {% for movie in movies %}
+            <div class="col">
+                <div class="card bg-light" style="width: 18rem;">
+                    <img style="width: auto; height: 25rem;" class="card-img-top" src="{{ movie.getImgUrl }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ movie.getTitle }}</h5>
+                        <p class="card-text">{{ movie.getDescription }}</p>
+                        <a href="#" class="btn btn-success">Add to cart</a>
+                        <a href="#" class="btn btn-danger">Buy</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card bg-light" style="width: 18rem;">
-                <img style="width: auto; height: 25rem" class="card-img-top" src="https://image.ceneostatic.pl/data/products/1215392/i-piraci-z-karaibow-2-skrzynia-umarlaka-pirates-of-the-caribbean-dead-man-s-chest-dvd.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-success">Add to cart</a>
-                    <a href="#" class="btn btn-danger">Buy</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card bg-light" style="width: 18rem;">
-                <img style="width: auto; height: 25rem" class="card-img-top" src="https://a.allegroimg.com/original/110b0f/463965e541c6bba8ae160afb21f0/FILM-DVD-FORREST-GUMP-POLSKI-JEZYK" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-success">Add to cart</a>
-                    <a href="#" class="btn btn-danger">Buy</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row pt-5">
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img style="width: auto; height: 25rem;" class="card-img-top" src="https://fwcdn.pl/fpo/01/87/187/7451731.3.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img style="width: auto; height: 25rem" class="card-img-top" src="https://image.ceneostatic.pl/data/products/1215392/i-piraci-z-karaibow-2-skrzynia-umarlaka-pirates-of-the-caribbean-dead-man-s-chest-dvd.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img style="width: auto; height: 25rem" class="card-img-top" src="https://fwcdn.pl/fpo/01/87/187/7451731.3.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 {% endblock %}

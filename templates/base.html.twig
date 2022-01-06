@@ -94,6 +94,16 @@
                             <i class="fs-4 bi-people"></i> <span style="color: #24b8bf" class="ms-1 d-none d-sm-inline">Customers</span>
                         </a>
                     </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="/" class="d-flex align-items-center p-3 text-white text-decoration-none">
+                            <span class="fs-5 d-none d-sm-inline">Admin section</span>
+                        </a>
+                        <li>
+                            <a href="{{ asset(path('app_add_movie')) }}" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-people"></i> <span style="color: #24b8bf" class="ms-1 d-none d-sm-inline">Add movie</span>
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
                 <hr>
 

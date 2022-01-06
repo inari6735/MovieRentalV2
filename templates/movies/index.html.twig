@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MoviesController!{% endblock %}
+
+{% block body %}
+    <div class="row pt-5 text-light">
+        {{ form_start(moviesForm) }}
+        {{ form_row(moviesForm.title) }}
+        {{ form_row(moviesForm.description) }}
+        {{ form_row(moviesForm.imgUrl) }}
+        <button type="submit" class="btn btn-danger btn-lg"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;">Add movie</button>
+        {{ form_end(moviesForm) }}
+    </div>
+{% endblock %}
