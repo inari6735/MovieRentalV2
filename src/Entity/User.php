@@ -4,11 +4,13 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -34,11 +36,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="datetime")
      */
     private $dateAdd;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $role;
 
     /**
      * @ORM\Column (type="array")
@@ -133,18 +130,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDateAdd(\DateTimeInterface $dateAdd): self
     {
         $this->dateAdd = $dateAdd;
-
-        return $this;
-    }
-
-    public function getRole(): ?int
-    {
-        return $this->role;
-    }
-
-    public function setRole(int $role): self
-    {
-        $this->role = $role;
 
         return $this;
     }

@@ -1,42 +1,44 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Repository\UserRepository;
+use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class RegistrationController extends AbstractController
 {
-    public UserPasswordHasherInterface $passwordHasher;
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager)
-    {
-        $this->passwordHasher = $passwordHasher;
-        $this->entityManager = $entityManager;
-    }
-
-    #[Route('/register', name: 'register')]
-    public function register(
-        UserRepository $userRepository
-    ): Response
+    #[Route('/register', name: 'app_register')]
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
 
-        dd($this->passwordHasher->hashPassword($user,'user'));
+        if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            $user->setPassword(
+            $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+            $user->setDateAdd(new \DateTime());
 
-        //getting data from registration form
-        $user = $userRepository->findOneBy(['username' => 'admin']);
-        $user->setRoles(['ROLE_ADMIN']);
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            // do anything else you need here, like send an email
 
-        return new Response("cos");
+            return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('registration/register.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
     }
-
 }
