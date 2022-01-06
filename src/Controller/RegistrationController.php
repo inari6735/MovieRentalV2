@@ -26,6 +26,10 @@ class RegistrationController extends AbstractController
         UserRepository $userRepository
     ): Response
     {
+        $user = new User();
+
+        dd($this->passwordHasher->hashPassword($user,'user'));
+
         //getting data from registration form
         $user = $userRepository->findOneBy(['username' => 'admin']);
         $user->setRoles(['ROLE_ADMIN']);

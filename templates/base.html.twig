@@ -15,17 +15,21 @@
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </head>
-<body>
-<nav class="shadow navbar navbar-expand-lg navbar-light bg-light bg-info m-0 p-0">
-    <div style="background-color: #7900FF" class="container-fluid p-lg-0">
+<body class="bg-dark bg-gradient">
+<nav
+    class="sticky-top shadow navbar navbar-expand-lg navbar-light bg-light bg-info m-0 p-0"
+    {{ is_granted('ROLE_PREVIOUS_ADMIN') ? 'style="background-color:red !important"' }}
+>
+    <div style="background-color: #7900FF" class="container-fluid p-lg-0 bg-dark bg-gradient">
         <div class="col-2 d-flex navbar-collapse justify-content-center">
             <a href="{{ path('app_home') }}">
-                <img src="{{ asset('/img/logo.png') }}" alt="logo" style="width: auto; height: auto; max-width: 280px; max-height: 150px">
+                <img src="{{ asset('/img/logo.png') }}" alt="logo" style="width: auto; height: auto; max-width: 100%; max-height: 100%">
             </a>
         </div>
         <div class="collapse navbar-collapse d-flex justify-content-end col-10 p-4" id="navbar-collapsable">
+
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <div style="font-weight: bold">{{ app.user.username }}</div>
+                    <div class="text-white" style="font-weight: bold;">{{ app.user.username }}</div>
                     <div class="dropdown">
                         <button
                                 class="dropdown-toggle btn"
@@ -48,6 +52,13 @@
                             <li>
                                 <a class="dropdown-item" href="{{ path('app_logout') }}">Log Out</a>
                             </li>
+                            {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                                <li>
+                                    <a class="dropdown-item" href="{{ path('app_home', {
+                                        '_switch_user': '_exit'
+                                    }) }}">Exit Impersonation</a>
+                                </li>
+                            {% endif %}
                         </ul>
                     </div>
                 {% else %}
@@ -56,6 +67,107 @@
     </div>
 
 </nav>
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-2 px-sm-2 px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-mid px-3 pt-2 text-white min-vh-100">
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <a href="/" class="d-flex align-items-center p-4 pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline">Menu</span>
+                    </a>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link align-middle px-0">
+                            <i class="fs-4 bi-house"></i> <span style="color: #24b8bf" class="ms-1 d-none d-sm-inline">Home</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-table"></i> <span style="color: #24b8bf" class="ms-1 d-none d-sm-inline">Orders</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-people"></i> <span style="color: #24b8bf" class="ms-1 d-none d-sm-inline">Customers</span>
+                        </a>
+                    </li>
+                </ul>
+                <hr>
+
+            </div>
+        </div>
+        <div class="container-fluid w-75">
+            <div class="row pt-5">
+                <div class="col">
+                    <div class="card bg-light" style="width: 18rem;">
+                        <img style="width: auto; height: 25rem;" class="card-img-top" src="https://fwcdn.pl/fpo/01/87/187/7451731.3.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-success">Add to cart</a>
+                            <a href="#" class="btn btn-danger">Buy</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card bg-light" style="width: 18rem;">
+                        <img style="width: auto; height: 25rem" class="card-img-top" src="https://image.ceneostatic.pl/data/products/1215392/i-piraci-z-karaibow-2-skrzynia-umarlaka-pirates-of-the-caribbean-dead-man-s-chest-dvd.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-success">Add to cart</a>
+                            <a href="#" class="btn btn-danger">Buy</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card bg-light" style="width: 18rem;">
+                        <img style="width: auto; height: 25rem" class="card-img-top" src="https://a.allegroimg.com/original/110b0f/463965e541c6bba8ae160afb21f0/FILM-DVD-FORREST-GUMP-POLSKI-JEZYK" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-success">Add to cart</a>
+                            <a href="#" class="btn btn-danger">Buy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-5">
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img style="width: auto; height: 25rem;" class="card-img-top" src="https://fwcdn.pl/fpo/01/87/187/7451731.3.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img style="width: auto; height: 25rem" class="card-img-top" src="https://image.ceneostatic.pl/data/products/1215392/i-piraci-z-karaibow-2-skrzynia-umarlaka-pirates-of-the-caribbean-dead-man-s-chest-dvd.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img style="width: auto; height: 25rem" class="card-img-top" src="https://fwcdn.pl/fpo/01/87/187/7451731.3.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
 {% block body %}{% endblock %}
 </body>
 </html>
