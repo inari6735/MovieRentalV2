@@ -1,8 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Hello CartController!{% endblock %}
 
 {% block body %}
+    <div style="background-color: #1fb7be" class=" text-dark d-flex w-100 align-content-end justify-content-end">
+        <div class="p-3">
+            <h2>Price sum: {{ priceSum }} zł</h2>
+        </div>
+        <div class="p-3">
+            <a href="#" class="btn btn-danger">Buy</a>
+        </div>
+    </div>
     <div class="row">
         {% for movie in movies %}
             <div class="col pt-5">
@@ -12,15 +20,11 @@
                         <h5 class="card-title">{{ movie.getTitle }}</h5>
                         <p style="height: 8rem" class="card-text overflow-auto">{{ movie.getDescription }}</p>
                         <a>{{ movie.getPrice }} zł</a>
-                        <a href="{{ asset(path('app_cart_add', {'movieId': movie.getId})) }}" class="btn btn-success">Add to cart</a>
-                        <a href="#" class="btn btn-danger">Buy</a>
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ asset(path('app_update_movies', {'movieId': movie.getId})) }}" class="btn btn-warning">Edit</a>
-                            <a href="{{ asset(path('app_delete_movies', {'movieId': movie.getId})) }}" class="btn btn-danger">Delete</a>
-                        {% endif %}
+                        <a href="{{ asset(path('app_cart_delete', {'movieId': movie.getId})) }}" class="btn btn-danger">Remove from cart</a>
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
+
 {% endblock %}

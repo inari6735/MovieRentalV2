@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Success!{% endblock %}
+
+{% block body %}
+    <div class="d-flex pt-5 text-light align-content-end justify-content-center justify-content-center align-items-center">
+        <h1 class="text-success">Success!</h1>
+        <a class="text-white text-decoration-none" href="{{ path('app_get_movies') }}">
+            <button type="button" class="btn" style="background-color: #1cb6bd">
+                Back to movies
+            </button>
+        </a>
+    </div>
+{% endblock %}

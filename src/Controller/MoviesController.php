@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Movies;
 use App\Form\AddMoviesFormType;
+use App\Repository\CartRepository;
 use App\Repository\MoviesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -76,5 +77,25 @@ class MoviesController extends AbstractController
             'moviesForm' => $form->createView(),
             'movie' => $movie
         ]);
+    }
+
+    #[Route('/movies/delete/{movieId}', name: 'app_delete_movies')]
+    public function deleteMovie(
+        int $movieId,
+        MoviesRepository $moviesRepository,
+        CartRepository $cartRepository
+    ): Response
+    {
+        $movie = $moviesRepository->findOneBy(['id' => $movieId]);
+        $userId = $this->getUser()->getId();
+        $cartMovies = $cartRepository->findBy(['movieId' => $movieId]);
+        $this->entityManager->remove($movie);
+        foreach($cartMovies as $cartMovie)
+        {
+            $this->entityManager->remove($cartMovie);
+            $this->entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_get_movies');
     }
 }

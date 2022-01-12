@@ -30,11 +30,16 @@
         </div>
         <div class="collapse navbar-collapse d-flex  col-10 p-4" id="navbar-collapsable">
                 <div class="d-flex col justify-content-start">
-                    <button type="submit"><i class="fa fa-search"></i></button>
-                    <input id="searchBar" name="searchBar" type="text" placeholder="Search...">
+                    <button class="btn bg-white border-0 rounded" type="submit"><i class="fa fa-search"></i></button>
+                    <input class="border-0 rounded" id="searchBar" name="searchBar" type="text" placeholder="Search...">
                 </div>
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <div class="d-flex col justify-content-end">
+                    <button class="btn pt-2">
+                        <img src="{{ asset('/img/cart.png') }}" alt="cart" style="width: 30px; height: 30px">
+                        <a href="{{ asset(path('app_cart')) }}" class="text-white" style="text-decoration: none">Cart</a>
+                    </button>
+
                     <div class="text-white pt-3" style="font-weight: bold;">{{ app.user.username }}</div>
                     <div class="dropdown">
                         <button
@@ -84,8 +89,8 @@
                         <span class="fs-5 d-none d-sm-inline">Menu</span>
                     </a>
                     <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span style="color: #24b8bf" class="ms-1 d-none d-sm-inline">Home</span>
+                        <a href="{{ asset(path('app_get_movies')) }}" class="nav-link align-middle px-0">
+                            <i class="fs-4 bi-house"></i> <span style="color: #24b8bf" class="ms-1 d-none d-sm-inline">Movies</span>
                         </a>
                     </li>
 

@@ -33,6 +33,7 @@ security:
                 username_parameter: username
                 password_parameter: password
                 enable_csrf: true
+
             logout: true
 
             switch_user: true
