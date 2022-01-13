@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Collection{% endblock %}
+
+{% block body %}
+    <div class="row">
+        {% for movie in movies %}
+            <div class="col pt-5">
+                <div class="card bg-light" style="width: 18rem;">
+                    <img style="width: auto; height: 25rem;" class="card-img-top" src="{{ movie['imgUrl'] }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ movie['title'] }}</h5>
+                        <p style="height: 8rem" class="card-text overflow-auto">{{ movie['description'] }}</p>
+                        <a class="text-success text-decoration-none">{{ movie['dateStart'].format('d/m/Y') }} - {{ movie['dateEnd'].format('d/m/Y') }}</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

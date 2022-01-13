@@ -95,14 +95,8 @@
                     </li>
 
                     <li>
-                        <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span style="color: #24b8bf" class="ms-1 d-none d-sm-inline">Orders</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-people"></i> <span style="color: #24b8bf" class="ms-1 d-none d-sm-inline">Customers</span>
+                        <a href="{{ path('app_collection') }}" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-table"></i> <span style="color: #24b8bf" class="ms-1 d-none d-sm-inline">My collection</span>
                         </a>
                     </li>
                     {% if is_granted('ROLE_ADMIN') %}

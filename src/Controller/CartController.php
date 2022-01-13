@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Cart;
 use App\Repository\CartRepository;
-use App\Repository\MoviesRepository;
+use App\Repository\CollectionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +22,8 @@ class CartController extends AbstractController
     #[Route('/cart/add/{movieId}', name: 'app_cart_add')]
     public function addMovie(
         int $movieId,
-        CartRepository $cartRepository
+        CartRepository $cartRepository,
+        CollectionRepository $collectionRepository
     ): Response
     {
         $cartItem = new Cart();
@@ -30,7 +31,8 @@ class CartController extends AbstractController
         $userId = $user->getId();
 
         $existingItem = $cartRepository->findOneBy(['movieId' => $movieId, 'userId' => $userId]);
-        if($existingItem)
+        $collectionMovie = $collectionRepository->findOneBy(['movieId' => $movieId, 'userId' => $userId]);
+        if($existingItem || $collectionMovie)
         {
             return $this->redirectToRoute('app_get_movies');
         }
