@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Cart;
 use App\Repository\CartRepository;
 use App\Repository\CollectionRepository;
+use App\Service\CartService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,7 +48,8 @@ class CartController extends AbstractController
 
     #[Route('/cart', name: 'app_cart')]
     public function getCart(
-        CartRepository $cartRepository
+        CartRepository $cartRepository,
+        CartService $cartService
     ): Response
     {
         $user = $this->getUser();
@@ -55,10 +57,8 @@ class CartController extends AbstractController
         $priceSum = null;
 
         $movies = $cartRepository->findMoviesByUserId($userId);
-        foreach($movies as $movie)
-        {
-            $priceSum += $movie->getPrice();
-        }
+
+        $priceSum = $cartService->getCartSum($movies);
 
         return $this->render('cart/index.html.twig', [
             'movies' => $movies,
