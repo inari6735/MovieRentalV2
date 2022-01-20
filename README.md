@@ -1,5 +1,13 @@
 # MovieRentalV2
 
+Do stworzenia projektu, korzystaliśmy z:
+- PHP 8.0.10
+- Symfony 6.0.1
+- PHPUnit 9.5.10
+- MySql 8.0.21
+
+Do nazewnictwa klas stosowaliśmy PascalCase, natomiast do nazywania funkcji i zmiennych camelCase.
+
 # Klasa CartService
 ![image](https://user-images.githubusercontent.com/32057515/150399324-f96fe3fa-a112-40c7-a058-3accae814d70.png)
 
